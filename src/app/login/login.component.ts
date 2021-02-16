@@ -22,10 +22,10 @@ export class LoginComponent implements OnInit {
   }
 
   onSubmit() {
-    var username = this.loginForm.value["username"];
-    var password = this.loginForm.value["password"];
+    const username = this.loginForm.value["username"];
+    const password = this.loginForm.value["password"];
     this.loginSvc.login(username, password).subscribe((data: Response) => {
-      if(data.Result) {
+      if(data.Success) {
         this.message = data.Message;
         this.loginForm.reset();
         window.location.href = data.RedirectURL;
@@ -33,7 +33,6 @@ export class LoginComponent implements OnInit {
       } else {
         this.message = data.Message;        
         this.loginForm.reset();
-        window.alert(data.Message);
       }
     });
   }
@@ -41,7 +40,7 @@ export class LoginComponent implements OnInit {
 }
 
 export class Response {
-  Result: boolean;
+  Success: boolean;
   Message: string;
   RedirectURL: string;
 }
